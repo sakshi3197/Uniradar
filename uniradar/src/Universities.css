@@ -1,0 +1,77 @@
+.universities-table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+  }
+  
+  .universities-table {
+    border-collapse: collapse;
+    margin: 1em;
+    font-size: 1.1em;
+    font-family: sans-serif;
+    min-width: 600px;
+    width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .universities-table thead tr {
+    background-color: #674ea7;
+    color: #ffffff;
+    text-align: left;
+  }
+  
+  .universities-table th,
+  .universities-table td {
+    padding: 12px 15px;
+  }
+  
+  .universities-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .universities-table tbody tr:nth-of-type(even) {
+    background-color: #f0eef7;
+  }
+  
+  .universities-table tbody tr:last-of-type {
+    border-bottom: 2px solid #674ea7;
+  }
+  
+
+  .filters-container {
+    margin-top: 2em;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .filter-item label {
+    font-weight: bold;
+  }
+
+  .filter-item select,
+  .filter-item input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+  }
+
+
+  .universities-table-container,
+.filters-container,
+.filter-item,
+.filter-item label,
+.filter-item select,
+.filter-item input[type="text"] {
+  font-size: 16px;
+}
