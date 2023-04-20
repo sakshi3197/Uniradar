@@ -92,6 +92,7 @@ def search_unis():
         else:
             rank = int(rank)
 
+
     # if 'university_name' in request.form:
         univers = form['university_name']
         if univers == "":
@@ -99,7 +100,7 @@ def search_unis():
         else:
             univers = "%"+str(form['university_name'])+"%"
         cursor = conn.cursor()
-
+        
         results = cursor.execute("""
                 SELECT DISTINCT u.university,z.rank_year,z.uni_score,u.link,c.country,u.city,r.region,u.logo,
                     x.unitype,q.research_output,u.student_faculty_ratio,u.international_students,s.size,u.faculty_count
@@ -250,13 +251,19 @@ def bookmark(email):
             logo = request.form['logo']
             unitype = request.form['unitype']
             research_output = request.form['research_output']
-            student_faculty_ratio = request.form['student_faculty_ratio']
+            student_faculty_ratio = request.form['student_faculty_ratio'] 
+            if student_faculty_ratio == 'None':
+                student_faculty_ratio =0.0
             international_students = request.form['international_students']
-            size = request.form['size']
+            if  international_students == 'None':
+                international_students =0.0
+            size = str(request.form['size'])
+            print(size)
             faculty_count = request.form['faculty_count']
-
-        except:
-
+            if faculty_count == 'None':
+                faculty_count =0.0
+        except Exception as e:
+            print(e)
             response.status = status.HTTP_400_BAD_REQUEST
             response.data = json.dumps(
                 {'message': 'pass all the fields in form'})
@@ -284,5 +291,20 @@ def bookmark(email):
             return response
 
 
+@app.route('/delete_account')
+@token_required
+def delete_account(email):
+
+    response = Response(mimetype='application/json')
+
+    cursor = conn.cursor()
+    try:
+        cursor.execute('DELETE FROM accounts WHERE email=%s;',(email))
+        conn.commit()
+    except:
+        response.status = status.HTTP_400_BAD_REQUEST
+        response.data = json.dumps({'message':'Account does not exist'})
+        return response
+        
 if __name__ == "main":
     app.run()
