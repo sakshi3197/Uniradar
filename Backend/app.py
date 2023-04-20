@@ -72,12 +72,31 @@ def search_unis():
 
         if 'country' in request.form:
             country = str(request.form['country'])
+            if country == "":
+                country ='%%'
+
+
         if 'year' in request.form:
-            year = int(request.form['year'])
+            year = request.form['year']
+            if year == "":
+                year=2022
+            else:
+                year = int(year)
+
         if 'rank' in request.form:
-            rank = int(request.form['rank'])
+            rank = request.form['rank']
+            if rank == "":
+                rank=30
+            else:
+                rank = int(rank)
+
         if 'university_name' in request.form:
-            univers = "%"+str(request.form['university_name'])+"%"
+            univers = request.form['university_name']
+            if univers == "":
+                univers = '%%'
+            else:
+                univers = "%"+str(request.form['university_name'])+"%"
+                
 
         cursor = conn.cursor()
         
@@ -231,13 +250,19 @@ def bookmark(email):
             logo = request.form['logo']
             unitype = request.form['unitype']
             research_output = request.form['research_output']
-            student_faculty_ratio = request.form['student_faculty_ratio']
+            student_faculty_ratio = request.form['student_faculty_ratio'] 
+            if student_faculty_ratio == 'None':
+                student_faculty_ratio =0.0
             international_students = request.form['international_students']
-            size = request.form['size']
+            if  international_students == 'None':
+                international_students =0.0
+            size = str(request.form['size'])
+            print(size)
             faculty_count = request.form['faculty_count']
-
-        except:
-
+            if faculty_count == 'None':
+                faculty_count =0.0
+        except Exception as e:
+            print(e)
             response.status = status.HTTP_400_BAD_REQUEST
             response.data = json.dumps(
                 {'message': 'pass all the fields in form'})
@@ -265,5 +290,20 @@ def bookmark(email):
             return response
 
 
+@app.route('/delete_account')
+@token_required
+def delete_account(email):
+
+    response = Response(mimetype='application/json')
+
+    cursor = conn.cursor()
+    try:
+        cursor.execute('DELETE FROM accounts WHERE email=%s;',(email))
+        conn.commit()
+    except:
+        response.status = status.HTTP_400_BAD_REQUEST
+        response.data = json.dumps({'message':'Account does not exist'})
+        return response
+        
 if __name__ == "main":
     app.run()
