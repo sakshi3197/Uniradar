@@ -1,1 +1,5 @@
-`
+flask
+jwt
+mysql-connector-python
+flask_api
+PyJWT
