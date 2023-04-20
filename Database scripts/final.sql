@@ -1,3 +1,4 @@
+use uniradar;
 LOAD DATA LOCAL INFILE '/Users/manaszagade/Study/ADT/Project/qs-world-university-rankings-2017-to-2022-V2.csv'  
  INTO TABLE countries 
  FIELDS TERMINATED BY ','    
@@ -70,8 +71,8 @@ SET `university`=@university,
 `logo`=@logo,
 `unitype_id`=(SELECT id from unitypes where unitype= @unitype),
 `research_output_id` = (SELECT id FROM research_outputs WHERE research_output = @research_output),
-`student_faculty_ratio`= REPLACE(student_faculty_ratio ,',','')  ,
-`international_students`=REPLACE(international_students,',','' ),
+`student_faculty_ratio`= REPLACE(@student_faculty_ratio ,',','')  ,
+`international_students`=REPLACE(@international_students,',','' ),
 `size_id` = (SELECT id FROM sizes WHERE size = @size),
 `faculty_count`=REPLACE(@faculty_count,',','')
  ;
