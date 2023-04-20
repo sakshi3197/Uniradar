@@ -75,22 +75,27 @@ const Universities = () => {
       formData.university_name = searchText
 
       console.log("FORM DATA:", formData)
-        const response = await axios.post('http://127.0.0.1:5000/search_unis', formData);
-        console.log("Response here is : ", response)
-        if(response === 200){
+        /*const response = */
+        var apidata ;
+        await axios.post('http://127.0.0.1:5000/search_unis', formData).then(response =>{
+          apidata = response;
+          console.log(response)
+        });
+        console.log("Response here is : ", apidata)
+        if(apidata.status === 200){
           console.log('Success! The response is 200');
           
-          if(response.no_of_records === 0){
+          if(apidata.no_of_records === 0){
             alert("No records for these filters. Please modify your filters and try again !")
             navigate('/Universities')
           }
           else{
-            setUniversities(response.data.data)
+            setUniversities(apidata.data.data)
           }
 
         }
         else{
-          console.log(`Heree Error: The response is ${response.status}`);
+          console.log(`Heree Error: The response is ${apidata.status}`);
         }
 
         navigate('/Universities');

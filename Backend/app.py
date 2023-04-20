@@ -5,14 +5,16 @@ from functools import wraps
 import os
 from flask import Flask, Response, jsonify, request
 from flask_api import status
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 # Establish a connection to the MySQL server
 conn = mysql.connector.connect(
     host='localhost',  # Replace with your MySQL server hostname or IP address
     user='root',  # Replace with your MySQL username
-    password='root',  # Replace with your MySQL password
+    password='Sakshi$1',  # Replace with your MySQL password
     database='uniradar'  # Replace with the name of your MySQL database
 )
 
@@ -62,7 +64,8 @@ def index():
 @app.route('/search_unis', methods=['POST'])
 def search_unis():
     response = Response(mimetype='application/json')
-
+    form = request.get_json()
+    print("Form Data:", form)
     if request.method == 'POST':
 
         country = '%%'
@@ -70,15 +73,31 @@ def search_unis():
         year = 2022
         rank = 30
 
-        if 'country' in request.form:
-            country = str(request.form['country'])
-        if 'year' in request.form:
-            year = request.form['year']
-        if 'rank' in request.form:
-            rank = request.form['rank']
-        if 'university_name' in request.form:
-            univers = "%"+str(request.form['university_name'])+"%"
+    # if 'country' in request.form:
+        country = str(form['country'])
+        if country == "":
+            country ='%%'
 
+    # if 'year' in request.form:
+        year = form['year']
+        if year == "":
+            year=2022
+        else:
+            year = int(year)
+
+    # if 'rank' in request.form:
+        rank = form['rank']
+        if rank == "":
+            rank=30
+        else:
+            rank = int(rank)
+
+    # if 'university_name' in request.form:
+        univers = form['university_name']
+        if univers == "":
+            univers = '%%'
+        else:
+            univers = "%"+str(form['university_name'])+"%"
         cursor = conn.cursor()
 
         results = cursor.execute("""
@@ -116,7 +135,7 @@ def search_unis():
                    'unitype', 'research_output', 'student_faculty_ratio', 'international_students', 'size', 'faculty_count']
         mainresponse = []
         for row in rows:
-            print(row)
+            
             tdict = {}
             for colno in range(len(row)):
                 tdict[reslist[colno]] = row[colno]
