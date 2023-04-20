@@ -8,6 +8,7 @@ import Universities from "./Universities";
 import SingleUniversity from "./SingleUniversity";
 import Favourites from "./Favourites";
 import Login from "./Login";
+import Signup from "./Signup";
 import ErrorPage from "./ErrorPage";
 import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
@@ -49,6 +50,7 @@ const theme = {
           <Route path="/contact" element={<Contact />} />
           <Route path="/singleUniversity/:id" element={<SingleUniversity />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/favourites/" element={<Favourites />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
