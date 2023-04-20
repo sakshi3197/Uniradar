@@ -73,14 +73,14 @@ def search_unis():
         if 'country' in request.form:
             country = str(request.form['country'])
         if 'year' in request.form:
-            year = request.form['year']
+            year = int(request.form['year'])
         if 'rank' in request.form:
-            rank = request.form['rank']
+            rank = int(request.form['rank'])
         if 'university_name' in request.form:
             univers = "%"+str(request.form['university_name'])+"%"
 
         cursor = conn.cursor()
-
+        
         results = cursor.execute("""
                 SELECT DISTINCT u.university,z.rank_year,z.uni_score,u.link,c.country,u.city,r.region,u.logo,
                     x.unitype,q.research_output,u.student_faculty_ratio,u.international_students,s.size,u.faculty_count

@@ -77,3 +77,17 @@ SET `university`=@university,
 `faculty_count`=REPLACE(@faculty_count,',','')
  ;
  
+LOAD DATA LOCAL INFILE '/Users/manaszagade/Study/ADT/Project/qs-world-university-rankings-2017-to-2022-V2.csv'  IGNORE
+ INTO TABLE rankings 
+ FIELDS TERMINATED BY ','    
+ ENCLOSED BY '"'
+LINES TERMINATED BY '\n'  
+IGNORE 1 ROWS
+(@university,@year,@rank,@score,@link,@country, @city,@region,@logo,@unitype,@research_output,@student_faculty_ratio,@international_students,@size,@faculty_count) -- Select columns from the CSV file
+
+SET `university_id`=(SELECT id FROM universities WHERE university = @university),
+`rank_year`=@year,
+`uni_rank` = @rank,
+ -- Map column1 with values from mapping_table
+`uni_score` = @score;
+
