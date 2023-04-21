@@ -180,12 +180,14 @@ const Universities = () => {
           <thead>
             <tr>
               <th>University</th>
+              <th>Score</th>
               <th>Country</th>
               <th>City</th>
               <th>Region</th>
               <th>Size</th>
               <th>Type</th>
               <th>Faculty Count</th>
+              <th>International Students</th>
               <th>Bookmark</th>
             </tr>
           </thead>
@@ -193,12 +195,15 @@ const Universities = () => {
             {filteredUniversities.map((uni, index) => (
               <tr key={index}>
                 <td>{uni.university}</td>
+                <td>{uni.uni_score}</td>
                 <td>{uni.country}</td>
                 <td>{uni.city}</td>
                 <td>{uni.region}</td>
                 <td>{uni.size}</td>
                 <td>{uni.unitype}</td>
                 <td>{uni.faculty_count}</td>
+                <td>{uni.international_students}</td>
+
                 <td>
                   {isBookmarked(uni) ? (
                     <BsFillBookmarkFill
