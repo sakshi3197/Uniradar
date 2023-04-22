@@ -1,17 +1,25 @@
-import React, {useState} from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import Cookies from 'js-cookie';
 import { CgMenu, CgClose } from "react-icons/cg";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 
 
 const Nav = () => {
     const [menuIcon, setMenuIcon] = useState();
-  
+    const navigate = useNavigate();
+
     const handleResetCookie = (e) => {
       Cookies.set('isSessionLoggedIn', "false", { expires: 1 });
+      Cookies.remove('current_user');
+
+      //window.location.reload();
+      navigate("./")
     };
   
     const Nav = styled.nav`
@@ -147,7 +155,7 @@ const Nav = () => {
     `;
   
     const isSessionLoggedIn = Cookies.get('isSessionLoggedIn');
-    if (isSessionLoggedIn !== "true") {
+    if (isSessionLoggedIn === "false") {
       return (
       <Nav>
         <div className={menuIcon ? "navbar active" : "navbar"}>
@@ -215,7 +223,7 @@ const Nav = () => {
       </Nav>
     );
       }
-      else
+      else if(isSessionLoggedIn === "true")
       {
         return (
           <Nav>

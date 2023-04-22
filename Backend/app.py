@@ -7,8 +7,9 @@ from flask import Flask, Response, jsonify, request
 from flask_api import status
 from flask_cors import CORS
 
+
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 # Establish a connection to the MySQL server
 conn = mysql.connector.connect(
@@ -59,6 +60,7 @@ def token_required(f):
 @app.route('/')
 def index():
     return "Hello Uniradar"
+
 
 
 @app.route('/search_unis', methods=['POST'])
@@ -153,13 +155,15 @@ def search_unis():
 @app.route('/register', methods=['POST'])
 def register():
 
-    if request.method == 'POST':
-        response = Response(mimetype='application/json')
+    response = Response(mimetype='application/json')
 
-        firstname = request.form['fname']
-        lastname = request.form['lname']
-        email = request.form['email']
-        password = request.form['password']
+    form = request.get_json()
+    if request.method == 'POST':
+
+        firstname = str(form['firstname'])
+        lastname = str(form['lastname'])
+        email = str(form['username'])
+        password = str(form['password'])
 
         # Insert data into register table
         cursor = conn.cursor()
@@ -172,24 +176,55 @@ def register():
             cursor.close()
             response.status = status.HTTP_201_CREATED
             response.data = json.dumps({'message': 'Account created'})
+
             return response
 
         except:
             response.status = status.HTTP_400_BAD_REQUEST
             response.data = json.dumps(
                 {'message': 'Account with email already exist'})
+
             return response
 
     pass
 
+@app.route('/fetch_details',methods=['POST'])
+def feth_details():
+
+    form = request.get_json()
+    print("Form:",form)
+    email = str(form['username'])
+
+    print("Email current user:",email)
+
+    response = Response(mimetype='application/json')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM accounts where email = %s;",(email,))
+
+    treturn = {}
+    row = cursor.fetchone()
+
+    treturn['firstname']= row[1]
+    treturn['lastname']=row[2]
+    treturn['email'] = row[3]
+    cursor.close()
+    response.status =status.HTTP_200_OK
+    response.data=json.dumps({"message":"user details fetched !","data":treturn})
+
+    print("Details:", treturn)
+    return response
 
 @app.route('/login', methods=['POST'])
 def login():
 
     if request.method == 'POST':
         response = Response(mimetype='application/json')
-        email = request.form['email']
-        password = request.form['password']
+        form = request.get_json()
+
+        print("Form:",form)
+        email = str(form['username'])
+        password = str(form['password'])
 
         cursor = conn.cursor()
 
@@ -223,12 +258,14 @@ def login():
                 return response
             else:
                 print(rows[0][0])
-                jwttoken = jwt.encode(
-                    {'email': str(rows[0][0])}, str(app.config['SECRET_KEY']), "HS256")
+                #jwttoken = jwt.encode(
+                #    {'email': str(rows[0][0])}, str(app.config['SECRET_KEY']), "HS256")
 
                 response.status = status.HTTP_201_CREATED
                 response.data = json.dumps(
-                    {'message': 'login successfull', 'token': str(jwttoken)})
+                    {'message': 'login successfull'})
+                
+
                 return response
 
 

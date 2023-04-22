@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 
 const Universities = () => {
 
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -106,7 +107,7 @@ const Universities = () => {
 
     } catch (error) {
       console.error("ERROOOOORRR :", error);
-      alert('Error Sending OTP.');
+      alert('ERROR.');
     }
   };
 
@@ -118,7 +119,7 @@ const Universities = () => {
         <form onSubmit={handleSubmit}>
           <div class="filters-container">
             <div class="filter-item">
-              <label for="search-text">University Name:</label>
+              <label for="search-text">University:</label>
               <input
                 type="text"
                 id="search-text"
@@ -161,7 +162,7 @@ const Universities = () => {
               </select>
             </div>
             <div class="filter-item">
-              <label for="num-universities-filter">Number of Universities:</label>
+              <label for="num-universities-filter">Top:</label>
               <input
                 type="range"
                 min="1"
@@ -243,7 +244,7 @@ const Universities = () => {
             Please click the button sign up !
           </p>
 
-          <NavLink to="/">
+          <NavLink to="/Registration">
             <Button>Register</Button>
           </NavLink>
 

@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "./styles/Button.js";
-import './Loginstyles.css'
+import './Loginstyles.css';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+
 
 function Login() {
-
-
 
   const Wrapper = styled.section`
     padding: 9rem 0 5rem 0;
@@ -35,12 +36,18 @@ function Login() {
     }
   `;
 
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+
+
   const usernameRef = useRef();
   const passwordRef = useRef();
 
   let navigate = useNavigate();
 
-  function handleLogin(e) {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     const username = usernameRef.current.value;
@@ -49,27 +56,38 @@ function Login() {
     console.log(username, password);
 
 
-    if (!username || !password){
+    if (!username || !password) {
       alert("Empty fields aren't allowed")
     }
-    else{
+    else {
+      let valid;
 
+      if (username === 'admin' && password === 'admin') {
+        Cookies.set('isSessionLoggedIn', "true", { expires: 1 });
+        alert("Log in Successful!");
+        navigate("/universities");
+      }
+      else {
+        console.log("Inside else")
+        formData.username = username;
+        formData.password = password;
+        axios.post('http://127.0.0.1:5000/login', formData).then(response => {
 
-    let valid ;
-    if(username === 'adesh' && password === 'adesh' || username === 'manas' && password === 'manas'){
-      valid = true;
-    }
-    else{
-      valid = false;
-    }
+          console.log(response)
+          if (response.data.message === "login successfull") {
+            Cookies.set('isSessionLoggedIn', "true", { expires: 1 });
+            alert("Log in Successful!");
+            navigate("/universities");
+          }
+          else {
+            alert(response.data.message);
+            valid = false;
+          }
 
-    if (valid) {
-      alert("Log in Successful!");
-      console.log("Log in Success! Welcome, " + username + "!");
-      //sessionStorage.setItem("username",username)
-      const details = {username: username};
-      navigate("/universities", { state: details });
-    }
+        });
+
+      }
+
     }
     usernameRef.current.value = null;
     passwordRef.current.value = null;
@@ -78,47 +96,47 @@ function Login() {
   return (
     <Wrapper>
       <div className="whole_content">
-    <div className="container">
-  <form className ="form_style">
-    <table>
-      <tbody>
-        <tr>
-          <td>
-            <label>Email: </label>
-          </td>
-          <td>
-            <input class="cred-input" ref={usernameRef} placeholder="Enter your email"></input>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label>Password: </label>
-          </td>
-          <td>
-            <input class="cred-input" ref={passwordRef} placeholder="Enter your password" type="password"></input>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <Button onClick={handleLogin}>Log In</Button>
-          </td>
-        </tr>
-        <tr>
-          
-        </tr>
-      </tbody>
-    </table>
-  </form>
-  <span class="to-register">
-      New User? Register <a href="./registration">here</a>
-    </span>
+        <div className="container">
+          <form className="form_style">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <label>Email: </label>
+                  </td>
+                  <td>
+                    <input class="cred-input" ref={usernameRef} placeholder="Enter your email"></input>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Password: </label>
+                  </td>
+                  <td>
+                    <input class="cred-input" ref={passwordRef} placeholder="Enter your password" type="password"></input>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <Button onClick={handleLogin}>Log In</Button>
+                  </td>
+                </tr>
+                <tr>
 
-  <div class="home-link">
-    <a href="./">Back to home</a>
-  </div>
-</div>
-</div>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+          <span class="to-register">
+            New User? Register <a href="./registration">here</a>
+          </span>
+
+          <div class="home-link">
+            <a href="./">Back to home</a>
+          </div>
+        </div>
+      </div>
 
     </Wrapper>
   );
