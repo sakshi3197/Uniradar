@@ -13,6 +13,7 @@ import { GlobalStyle } from "./GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Registration from "./Registration";
 
 const App = () => {
 const theme = {
@@ -50,6 +51,7 @@ const theme = {
           <Route path="/singleUniversity/:id" element={<SingleUniversity />} />
           <Route path="/login" element={<Login />} />
           <Route path="/favourites/" element={<Favourites />} />
+          <Route path="/registration/" element={<Registration />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

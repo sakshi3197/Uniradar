@@ -1,0 +1,48 @@
+label{
+    font-size: large;
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+    margin-left: 100px;
+    /*float: left;*/
+
+}
+.reg-form{
+    margin-top: 30px;
+    margin-left: 450px;
+}
+.error-msg{
+    margin-left: 300px;
+}
+.pwd-checklist{
+
+    margin-left: 270px;
+}
+.cred-input{
+    width: 300px;
+    margin-left: 15px;
+    margin-bottom: 25px;
+}
+
+.reg-btn{
+    margin-left: 300px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.to-login{
+    font-size: medium;
+    margin-left: 235px;
+}
+
+.reg-home-link{
+    font-size: medium;
+    margin-left: 750px;
+}
+
+
+.whole_content{
+    margin-top: 6em;
+    margin-left: -90px;
+}
