@@ -34,9 +34,9 @@ const Universities = () => {
 
     if(details){
       setUsername(details.username)
-    console.log("In Universities after login\nWelcome:",username)
+    console.log("In Universities after login\nWelcome:",details.username)
     }
-  }, [username]);
+  }, []);
 
   useEffect(() => {
     fetch("/sample.json")
