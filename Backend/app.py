@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 conn = mysql.connector.connect(
     host='localhost',  # Replace with your MySQL server hostname or IP address
     user='root',  # Replace with your MySQL username
-    password='Sakshi$1',  # Replace with your MySQL password
+    password='root',  # Replace with your MySQL password
     database='uniradar'  # Replace with the name of your MySQL database
 )
 
@@ -291,6 +291,30 @@ def bookmark(email):
             return response
 
 
+@app.route('/fetch_details',methods=['POST'])
+@token_required
+def feth_details(email):
+
+    response = Response(mimetype='application/json')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM accounts where email = %s;",(email,))
+
+    treturn = {}
+    row = cursor.fetchone()
+    
+    treturn['firstname']= row[1]
+    treturn['lastname']=row[2]
+    treturn['email'] = row[3]
+    cursor.close()
+    response.status =status.HTTP_200_OK
+    response.data=json.dumps({"message":"user details fetched !","data":treturn})
+
+
+
+
+    return response
+
 @app.route('/delete_account')
 @token_required
 def delete_account(email):
@@ -299,7 +323,7 @@ def delete_account(email):
 
     cursor = conn.cursor()
     try:
-        cursor.execute('DELETE FROM accounts WHERE email=%s;',(email))
+        cursor.execute('DELETE FROM accounts WHERE email=%s;',(email,))
         conn.commit()
     except:
         response.status = status.HTTP_400_BAD_REQUEST
