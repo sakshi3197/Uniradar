@@ -2,13 +2,17 @@ import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { BsFillBookmarkFill } from "react-icons/bs";
-
+import Cookies from 'js-cookie';
 import { CgMenu, CgClose } from "react-icons/cg";
 
 
 
 const Nav = () => {
     const [menuIcon, setMenuIcon] = useState();
+  
+    const handleResetCookie = (e) => {
+      Cookies.set('isSessionLoggedIn', "false", { expires: 1 });
+    };
   
     const Nav = styled.nav`
       .navbar-lists {
@@ -142,7 +146,9 @@ const Nav = () => {
       }
     `;
   
-    return (
+    const isSessionLoggedIn = Cookies.get('isSessionLoggedIn');
+    if (isSessionLoggedIn !== "true") {
+      return (
       <Nav>
         <div className={menuIcon ? "navbar active" : "navbar"}>
           <ul className="navbar-lists">
@@ -208,6 +214,61 @@ const Nav = () => {
         </div>
       </Nav>
     );
+      }
+      else
+      {
+        return (
+          <Nav>
+            <div className={menuIcon ? "navbar active" : "navbar"}>
+              <ul className="navbar-lists">
+                <li>
+                  <NavLink
+                    to="/universities"
+                    className="navbar-link "
+                    onClick={() => setMenuIcon(false)}>
+                    Universities
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/profile"
+                    className="navbar-link "
+                    onClick={() => setMenuIcon(false)}>
+                    Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/"
+                    className="navbar-link "
+                    onClick={handleResetCookie}>
+                    Logout
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/favourites" className="navbar-link cart-trolley--link">
+                    <BsFillBookmarkFill className="cart-trolley" />
+                  </NavLink>
+                </li>
+              </ul>
+      
+              <div className="mobile-navbar-btn">
+                <CgMenu
+                  name="menu-outline"
+                  className="mobile-nav-icon"
+                  onClick={() => setMenuIcon(true)}
+                />
+                <CgClose
+                  name="close-outline"
+                  className="mobile-nav-icon close-outline"
+                  onClick={() => setMenuIcon(false)}
+                />
+              </div>
+            </div>
+          </Nav>
+        );
+      }
+
   };
   
   export default Nav;
