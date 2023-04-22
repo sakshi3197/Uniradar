@@ -1,0 +1,22 @@
+label{
+    font-size: large;
+}
+.cred-input{
+    width: 300px;
+    margin-left: 15px;
+    margin-bottom: 25px;
+}
+.login-btn{
+    margin-left: 200px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.to-register{
+    font-size: medium;
+    margin-left: 200px;
+}
+
+.home-link{
+    font-size: medium;
+    margin-left: 200px;
+}

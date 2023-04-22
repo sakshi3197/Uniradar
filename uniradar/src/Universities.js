@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from "react";
 import './Universities.css';
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-
+import { useLocation } from 'react-router-dom';
 
 const Universities = () => {
+  //var username = sessionStorage.getItem("username");
+  /*var username ="";
+  if(sessionStorage.getItem("username") != null){
+    username = sessionStorage.getItem("username")
+    console.log("Welcome",username);
+  }else{
+    console.log("No one logged in")
+  }
+  sessionStorage.clear()
+  console.log(username)*/
+
+
+  const location = useLocation();
+  
   const [universities, setUniversities] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [regionFilter, setRegionFilter] = useState("");
@@ -11,7 +25,18 @@ const Universities = () => {
   const [countryFilter, setCountryFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
+  const [username, setUsername] = useState([])
 
+
+  useEffect(() => {
+
+    const details = location.state;
+
+    if(details){
+      setUsername(details.username)
+    console.log("In Universities after login\nWelcome:",username)
+    }
+  }, [username]);
 
   useEffect(() => {
     fetch("/sample.json")
