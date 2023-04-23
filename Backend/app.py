@@ -155,6 +155,7 @@ def search_unis():
 @app.route('/register', methods=['POST'])
 def register():
 
+    print("Inside register")
     response = Response(mimetype='application/json')
 
     form = request.get_json()

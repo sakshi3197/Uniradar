@@ -31,11 +31,12 @@ function Registration() {
     }
   };
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("We are here1!!")
     const fname = fNameRef.current.value;
     const lname = lNameRef.current.value;
     const username = usernameRef.current.value;
@@ -49,6 +50,8 @@ function Registration() {
       formData.lastname = lname
       formData.username = username
       formData.password = password
+
+      console.log(formData)
 
       const response = await axios.post('http://127.0.0.1:5000/register', formData);
       alert(response.data.message);
