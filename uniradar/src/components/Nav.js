@@ -19,7 +19,7 @@ const Nav = () => {
       Cookies.remove('current_user');
 
       //window.location.reload();
-      navigate("./")
+      navigate("/")
     };
   
     const Nav = styled.nav`

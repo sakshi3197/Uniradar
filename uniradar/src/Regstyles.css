@@ -9,8 +9,8 @@ label{
 
 }
 .reg-form{
-    margin-top: 30px;
-    margin-left: 450px;
+    margin-top: 100px;
+    margin-left: 550px;
 }
 .error-msg{
     margin-left: 300px;
@@ -38,11 +38,11 @@ label{
 
 .reg-home-link{
     font-size: medium;
-    margin-left: 750px;
+    margin-left: 850px;
 }
 
 
 .whole_content{
-    margin-top: 6em;
+    margin-top: 10em;
     margin-left: -90px;
 }

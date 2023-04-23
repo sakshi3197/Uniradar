@@ -33,3 +33,10 @@ label{
     margin-left: -200px;
     margin-top: -50px;
 }
+
+.heading{
+    font-style: italic;
+    margin-left: 3px;
+    margin-top: -1.5em;
+    margin-bottom: 0.7em;
+}

@@ -212,7 +212,6 @@ def feth_details():
     response.status =status.HTTP_200_OK
     response.data=json.dumps({"message":"user details fetched !","data":treturn})
 
-    print("Details:", treturn)
     return response
 
 @app.route('/login', methods=['POST'])
@@ -328,20 +327,52 @@ def bookmark(email):
             return response
 
 
-@app.route('/delete_account')
-@token_required
-def delete_account(email):
+@app.route('/delete_account', methods=['POST'])
+def delete_account():
+
+    form = request.get_json()
+    email = str(form['username'])
 
     response = Response(mimetype='application/json')
 
     cursor = conn.cursor()
     try:
-        cursor.execute('DELETE FROM accounts WHERE email=%s;',(email))
+        cursor.execute('DELETE FROM accounts WHERE email=%s;',(email,))
         conn.commit()
-    except:
+
+    except Exception as e:
+        print("Error:", e)
         response.status = status.HTTP_400_BAD_REQUEST
         response.data = json.dumps({'message':'Account does not exist'})
         return response
+    
+    response.data = json.dumps({'message':'Account Deleted'})
+    return response
+
+@app.route('/update_user', methods=['POST'])
+def update_user():
+
+    form = request.get_json()
+    firstname = str(form['firstname'])
+    lastname = str(form['lastname'])
+    email = str(form['email'])
+
+    response = Response(mimetype='application/json')
+
+    cursor = conn.cursor()
+    try:
+        cursor.execute('UPDATE accounts SET firstname = %s, lastname =%s WHERE email=%s;',(firstname, lastname, email))
+        conn.commit()
+
+    except Exception as e:
+        print("Error:", e)
+        response.status = status.HTTP_400_BAD_REQUEST
+        response.data = json.dumps({'message':'ERROR'})
+        return response
+    
+    response.data = json.dumps({'message':'Details Updated'})
+    return response
+
         
 if __name__ == "main":
     app.run()

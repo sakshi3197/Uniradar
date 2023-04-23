@@ -1,0 +1,66 @@
+label{
+    font-size: large;
+}
+.cred-input{
+    width: 300px;
+    margin-left: 15px;
+    margin-bottom: 25px;
+}
+.login-btn{
+    margin-left: 200px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.to-register{
+    font-size: medium;
+    margin-left: 12em;
+    margin-top: 10em;
+}
+
+.home-link{
+    font-size: medium;
+    margin-left: 13em;
+}
+
+.form_style {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .whole_content{
+    margin-left: -200px;
+    margin-top: -50px;
+}
+
+.heading{
+    margin-left: 3.8em;
+    margin-top: -1.5em;
+    margin-bottom: 0.7em;
+}
+
+.UpdateButton{
+    margin-right: 5em;
+    margin-bottom: 0.8em;
+}
+
+.CancelButton{
+    margin-left: 0.4em;
+}
+
+.DeleteButton {
+    margin-top: 1em;
+    color: #000; /* Set the default text color */
+    border: 1px solid #000; /* Add a border */
+  }
+  
+  .DeleteButton:hover {
+    background-color: rgb(171, 7, 7); /* Set the background color to red when hovered */
+    color: #fff; /* Set the text color to white when hovered */
+    cursor: pointer; /* Change the cursor to a pointer when hovered */
+  }
+  
+.DeleteButton, .UpdateButton, .CancelButton{
+    margin-left: -3em;
+}

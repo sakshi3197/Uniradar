@@ -76,6 +76,7 @@ function Login() {
           console.log(response)
           if (response.data.message === "login successfull") {
             Cookies.set('isSessionLoggedIn', "true", { expires: 1 });
+            Cookies.set('current_user', username, { expires: 1 });
             alert("Log in Successful!");
             navigate("/universities");
           }
@@ -97,6 +98,8 @@ function Login() {
     <Wrapper>
       <div className="whole_content">
         <div className="container">
+        <h2 className="heading">We are happy to see you back !!</h2>
+
           <form className="form_style">
             <table>
               <tbody>
