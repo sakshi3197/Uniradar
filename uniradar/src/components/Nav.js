@@ -248,11 +248,6 @@ const Nav = () => {
                     Logout
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/favourites" className="navbar-link cart-trolley--link">
-                    <BsFillBookmarkFill className="cart-trolley" />
-                  </NavLink>
-                </li>
               </ul>
       
               <div className="mobile-navbar-btn">
