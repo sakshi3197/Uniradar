@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { Button } from "../styles/Button";
 import { FaDiscord, FaInstagram, FaYoutube } from "react-icons/fa";
+import './Footer.css'
 
 const Footer = () => {
   return (
@@ -26,7 +27,7 @@ const Footer = () => {
 
         <footer>
             <div className="footer-social">
-              <h3>Follow Us</h3>
+              <h3 className="follow">Follow Us</h3>
               <div className="footer-social--icons white_font">
                 <div>
                   <FaDiscord className="icons" />
@@ -51,6 +52,9 @@ const Footer = () => {
 const Wrapper = styled.section`
   .iSIFGq {
     margin: 0;
+  }
+  .follow{
+    margin-left: 36.7em;
   }
   .contact-short {
     max-width: 60vw;
@@ -79,6 +83,7 @@ const Wrapper = styled.section`
         color: white;
     }
     .footer-social--icons {
+      margin-left: 61em;
       display: flex;
       gap: 2rem;
       div {
