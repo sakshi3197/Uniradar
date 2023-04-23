@@ -79,7 +79,7 @@ const handleSubmit = event => {
 };
 
       const handleCancel = event => {
-        navigate("./universities")
+        navigate("/universities")
       };
 
 

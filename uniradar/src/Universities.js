@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Universities.css';
-import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { BsBookmark, BsFillBookmarkFill, BsSearch} from "react-icons/bs";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -173,12 +173,12 @@ const Universities = () => {
               />
               <span>{rankFilter}</span>
             </div>
-            <button
+            <Button
               type="submit"
               style={{ backgroundColor: "#674ea7", marginLeft: "10px" }}
             >
-              Submit
-            </button>
+              <BsSearch className="cart-trolley" />
+            </Button>
 
           </div>
         </form>
