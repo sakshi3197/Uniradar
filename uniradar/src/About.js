@@ -2,8 +2,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { Button } from './styles/Button';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
+
+  const handleNavigation = event => {
+    navigate("./universities")
+  };
+  const navigate = useNavigate();
 
   return (
     <Wrapper>
@@ -20,7 +26,7 @@ const About = () => {
             We are constantly updating our database and adding new features to make the UniRadar experience even better. We welcome feedback from our users and strive to incorporate their suggestions into our application. Our mission is to help students find the right university and achieve their academic goals, and we are proud to be a part of their journey.
             </p>
             <NavLink>
-              <Button>Explore Now</Button>
+              <Button><NavLink to="/universities"> Explore Now </NavLink></Button>
             </NavLink>
           </div>
           <div className="hero-section-image">

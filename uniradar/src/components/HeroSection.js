@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = ({ myData }) => {
   const { name } = myData;
+  const navigate = useNavigate();
+  const handleNavigation = event => {
+    navigate("./universities")
+  };
 
   return (
     <Wrapper>
@@ -16,7 +21,7 @@ const HeroSection = ({ myData }) => {
             Welcome to UniRadar, the ultimate destination for all your university-related queries and concerns!</p> 
             <p>At UniRadar, we understand how important it is to make the right choice when it comes to higher education. That's why we have gathered extensive data and insights about thousands of universities to help you make informed decisions. Our easy-to-use interface and powerful search engine allow you to quickly find and compare universities based on your preferred criteria, such as location, academic programs, tuition fees, and more. </p>
             <NavLink>
-              <Button>Explore Now</Button>
+            <Button><NavLink to="/universities"> Explore Now </NavLink></Button>
             </NavLink>
           </div>
           <div className="hero-section-image">
