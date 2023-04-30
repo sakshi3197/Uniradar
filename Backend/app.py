@@ -9,9 +9,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type"])
-
-
+cors = CORS(app, resources={r"/*": {"origins": "https://uniradar-frontend.netlify.app/"}})
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 # Establish a connection to the MySQL server
 conn = mysql.connector.connect(
@@ -23,12 +21,6 @@ conn = mysql.connector.connect(
 
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-
-@app.after_request
-def after_request(response):
-    header = response.headers
-    header['Access-Control-Allow-Origin'] = '*'
-    return response
 
 
 def token_required(f):
@@ -68,10 +60,6 @@ def token_required(f):
 @app.route('/')
 def index():
     return "Hello Uniradar"
-
-@app.route('/testPing')
-def testPing():
-    return "Hi ! App seems to be working fine !!"
 
 
 
