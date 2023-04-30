@@ -155,117 +155,118 @@ const Nav = () => {
     `;
   
     const isSessionLoggedIn = Cookies.get('isSessionLoggedIn');
-    if (isSessionLoggedIn === "false") {
+    if (isSessionLoggedIn === "true") {
+
       return (
-      <Nav>
-        <div className={menuIcon ? "navbar active" : "navbar"}>
-          <ul className="navbar-lists">
-            <li>
-              <NavLink
-                to="/"
-                className="navbar-link "
-                onClick={() => setMenuIcon(false)}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className="navbar-link "
-                onClick={() => setMenuIcon(false)}>
-                About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/universities"
-                className="navbar-link "
-                onClick={() => setMenuIcon(false)}>
-                Universities
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className="navbar-link "
-                onClick={() => setMenuIcon(false)}>
-                Contact
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/login"
-                className="navbar-link "
-                onClick={() => setMenuIcon(false)}>
-                Login
-              </NavLink>
-            </li>
-          </ul>
-  
-          <div className="mobile-navbar-btn">
-            <CgMenu
-              name="menu-outline"
-              className="mobile-nav-icon"
-              onClick={() => setMenuIcon(true)}
-            />
-            <CgClose
-              name="close-outline"
-              className="mobile-nav-icon close-outline"
-              onClick={() => setMenuIcon(false)}
-            />
+        <Nav>
+          <div className={menuIcon ? "navbar active" : "navbar"}>
+            <ul className="navbar-lists">
+              <li>
+                <NavLink
+                  to="/universities"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  Universities
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/profile"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/"
+                  className="navbar-link "
+                  onClick={handleResetCookie}>
+                  Logout
+                </NavLink>
+              </li>
+            </ul>
+    
+            <div className="mobile-navbar-btn">
+              <CgMenu
+                name="menu-outline"
+                className="mobile-nav-icon"
+                onClick={() => setMenuIcon(true)}
+              />
+              <CgClose
+                name="close-outline"
+                className="mobile-nav-icon close-outline"
+                onClick={() => setMenuIcon(false)}
+              />
+            </div>
           </div>
-        </div>
-      </Nav>
-    );
+        </Nav>
+      );
+    
       }
-      else if(isSessionLoggedIn === "true")
+      else
       {
         return (
-          <Nav>
-            <div className={menuIcon ? "navbar active" : "navbar"}>
-              <ul className="navbar-lists">
-                <li>
-                  <NavLink
-                    to="/universities"
-                    className="navbar-link "
-                    onClick={() => setMenuIcon(false)}>
-                    Universities
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/profile"
-                    className="navbar-link "
-                    onClick={() => setMenuIcon(false)}>
-                    Profile
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/"
-                    className="navbar-link "
-                    onClick={handleResetCookie}>
-                    Logout
-                  </NavLink>
-                </li>
-              </ul>
-      
-              <div className="mobile-navbar-btn">
-                <CgMenu
-                  name="menu-outline"
-                  className="mobile-nav-icon"
-                  onClick={() => setMenuIcon(true)}
-                />
-                <CgClose
-                  name="close-outline"
-                  className="mobile-nav-icon close-outline"
-                  onClick={() => setMenuIcon(false)}
-                />
-              </div>
+        <Nav>
+          <div className={menuIcon ? "navbar active" : "navbar"}>
+            <ul className="navbar-lists">
+              <li>
+                <NavLink
+                  to="/"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/about"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  About
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/universities"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  Universities
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/contact"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  Contact
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/login"
+                  className="navbar-link "
+                  onClick={() => setMenuIcon(false)}>
+                  Login
+                </NavLink>
+              </li>
+            </ul>
+    
+            <div className="mobile-navbar-btn">
+              <CgMenu
+                name="menu-outline"
+                className="mobile-nav-icon"
+                onClick={() => setMenuIcon(true)}
+              />
+              <CgClose
+                name="close-outline"
+                className="mobile-nav-icon close-outline"
+                onClick={() => setMenuIcon(false)}
+              />
             </div>
-          </Nav>
-        );
-      }
+          </div>
+        </Nav>
+      );}
 
   };
   

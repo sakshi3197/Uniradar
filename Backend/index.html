@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Ping</title>
+  </head>
+  <body>
+    <h1>Test Ping</h1>
+    <p id="response"></p>
+    <script>
+      fetch('/testPing')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('response').innerHTML = data;
+        });
+    </script>
+  </body>
+</html>
