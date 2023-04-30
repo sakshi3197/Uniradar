@@ -71,7 +71,7 @@ function Login() {
         console.log("Inside else")
         formData.username = username;
         formData.password = password;
-        axios.post('http://127.0.0.1:5000/login', formData).then(response => {
+        axios.post('https://healthmate-backend.onrender.com/login', formData).then(response => {
 
           console.log(response)
           if (response.data.message === "login successfull") {

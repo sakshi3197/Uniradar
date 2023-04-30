@@ -53,7 +53,7 @@ function Registration() {
 
       console.log(formData)
 
-      const response = await axios.post('http://127.0.0.1:5000/register', formData);
+      const response = await axios.post('https://healthmate-backend.onrender.com/register', formData);
       alert(response.data.message);
       navigate("/login");
     }

@@ -82,7 +82,7 @@ const Universities = () => {
       console.log("FORM DATA:", formData)
       /*const response = */
       var apidata;
-      await axios.post('http://127.0.0.1:5000/search_unis', formData).then(response => {
+      await axios.post('https://healthmate-backend.onrender.com/search_unis', formData).then(response => {
         apidata = response;
         console.log(response)
       });
