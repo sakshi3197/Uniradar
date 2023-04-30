@@ -9,7 +9,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "https://uniradar-frontend.netlify.app", "headers": ["Content-Type"]}})
+cors = CORS(app)
 
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 # Establish a connection to the MySQL server
