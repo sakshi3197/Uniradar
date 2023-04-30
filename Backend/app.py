@@ -13,9 +13,9 @@ cors = CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 # Establish a connection to the MySQL server
 conn = mysql.connector.connect(
-    host='localhost',  # Replace with your MySQL server hostname or IP address
+    host='110.173.184.228',  # Replace with your MySQL server hostname or IP address
     user='root',  # Replace with your MySQL username
-    password='Sakshi$1',  # Replace with your MySQL password
+    password='spk67890',  # Replace with your MySQL password
     database='uniradar'  # Replace with the name of your MySQL database
 )
 
