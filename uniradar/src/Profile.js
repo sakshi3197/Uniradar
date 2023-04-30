@@ -54,7 +54,7 @@ const Profile = () => {
         const userEmail = Cookies.get('current_user');
         formData.username = userEmail;
         console.log("EMAIL:", formData.username);
-        axios.post('https://uniradar-backend.netlify.app/fetch_details', formData).then(response => {
+        axios.post('https://uniradar-backend.onrender.com/fetch_details', formData).then(response => {
             setUser(response.data.data);
             console.log("HEREEEE response.data.data:", response.data.data);
 
@@ -69,7 +69,7 @@ const handleSubmit = event => {
   event.preventDefault();
   console.log("HERE:", user);
 
-  axios.post('https://uniradar-backend.netlify.app/update_user', user).then(response => {
+  axios.post('https://uniradar-backend.onrender.com/update_user', user).then(response => {
       console.log(" update response:", response);
       alert("Details have been updated");
       navigate("/universities")
@@ -87,7 +87,7 @@ const handleSubmit = event => {
         const userEmail = Cookies.get('current_user');
         formData.username = userEmail;
         console.log("EMAIL:", formData.username);
-        axios.post('https://uniradar-backend.netlify.app/delete_account', formData).then(response => {
+        axios.post('https://uniradar-backend.onrender.com/delete_account', formData).then(response => {
             console.log(" delete response:", response);
             alert("Your account has been deleted. You will be logged out automatically.");
             Cookies.set('isSessionLoggedIn', "false", { expires: 1 });

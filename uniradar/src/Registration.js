@@ -53,7 +53,7 @@ function Registration() {
 
       console.log(formData)
 
-      const response = await axios.post('https://uniradar-backend.netlify.app/register', formData);
+      const response = await axios.post('https://uniradar-backend.onrender.com/register', formData);
       alert(response.data.message);
       navigate("/login");
     }
