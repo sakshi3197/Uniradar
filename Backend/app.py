@@ -9,7 +9,8 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type"])
+
 
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", None)
 # Establish a connection to the MySQL server
