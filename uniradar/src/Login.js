@@ -5,6 +5,7 @@ import { Button } from "./styles/Button.js";
 import './Loginstyles.css';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { NavLink } from "react-router-dom";
 
 
 function Login() {
@@ -132,7 +133,12 @@ function Login() {
             </table>
           </form>
           <span class="to-register">
-            New User? Register <a href="./registration">here</a>
+          <NavLink
+                  to="/registration">
+                  
+
+            New User?   Register!!                </NavLink>
+
           </span>
 
           <div class="home-link">
